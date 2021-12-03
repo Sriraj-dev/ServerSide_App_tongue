@@ -1,34 +1,17 @@
 
 
-List currentOrders = [
-  {
-    'customerName' : 'FirstUser',
-    'customerLocation': 'S-9,BlockB ,XYZ apartments ,XYZ colony,Hyderabad',
-    'customerOrder': [
-      {
-        'itemName': 'Manchuria',
-        'itemCost': '75',
-      }
-    ],
-  },
-  {
-    'customerName' : 'SecondUser',
-    'customerLocation': 'S-9,BlockB ,XYZ apartments ,XYZ colony,Hyderabad',
-    'customerOrder': [
-      {
-        'itemName': 'Biryani',
-        'itemCost': '150',
-      }
-    ],
-  },
-  {
-    'customerName' : 'NewUser',
-    'customerLocation': 'S-9,BlockB ,XYZ apartments ,XYZ colony,Hyderabad',
-    'customerOrder': [
-      {
-        'itemName': 'Sprite',
-        'itemCost': '150',
-      }
-    ],
-  },
-];
+import 'package:tongue_services/Services/APIservices.dart';
+
+List currentOrders = [];
+// list of maps = eachMap = {_id,customerName,customerAddress,customerPhone,latitude,longitude,amountPaid,orderItems=[],accepted}
+List pastOrders = [];
+// list of maps = eachMap = {orderId,customerName,customerAddress,customerPhone,latitude,longitude,amountPaid,orderItems=[]}
+//both maps contain  = {createdAt: , updatedAt: }
+
+setCurrentOrders()async{
+  currentOrders = await ApiServices().getCurrentOrders();
+}
+
+setPastOrders()async{
+  pastOrders = await ApiServices().getPastOrders();
+}
