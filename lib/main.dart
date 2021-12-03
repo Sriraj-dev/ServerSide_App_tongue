@@ -47,7 +47,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         if(snapshot.hasError){
           return Scaffold(
             body: Center(
-              child: Text('An Error Occured!!',style: TextStyle(fontSize: 20),),
+              child: Text('${snapshot.error}',style: TextStyle(fontSize: 20),),
             ),
           );
         }
