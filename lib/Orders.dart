@@ -9,9 +9,11 @@ List pastOrders = [];
 //both maps contain  = {createdAt: , updatedAt: }
 
 setCurrentOrders()async{
-  currentOrders = await ApiServices().getCurrentOrders();
+  currentOrders = await ApiServices().getCurrentOrders("");
 }
 
 setPastOrders()async{
-  pastOrders = await ApiServices().getPastOrders();
+  pastOrders = await ApiServices().getPastOrders("");
 }
+
+
