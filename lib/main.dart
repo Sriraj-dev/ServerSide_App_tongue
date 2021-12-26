@@ -1,12 +1,18 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tongue_services/Orders.dart';
 import 'package:tongue_services/Screens/NetworkError.dart';
 import 'package:tongue_services/Screens/homePage.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:tongue_services/Services/APIservices.dart';
+import 'package:tongue_services/constants.dart';
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: LaunchScreen(),
   ));
 }
@@ -25,8 +31,14 @@ class _LaunchScreenState extends State<LaunchScreen> {
     //TODO: Check network Connection
     final network = await checkNetwork();
     if(network){
+      print('Network connection working');
+      await getBranches();
       await setCurrentOrders();
-      await setPastOrders();
+      setPastOrders();
+      setRejectedOrders();
+      items = await ApiServices().getItems();
+      initialiseCategoryItems();
+      initialiseMenu();
       return 1;
     }else{
       return 0;
@@ -60,21 +72,31 @@ class _LaunchScreenState extends State<LaunchScreen> {
           }
         }
         else{
-          return Scaffold(
-            body: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Loading App',style: TextStyle(fontSize: 20),),
-                  JumpingText('...',style: TextStyle(fontSize:20),)
-                ],
-              ),
-            ),
-          );
+          return splashScreen();
         }
         return Container();
       }
     );
+  }
+
+  Scaffold splashScreen() {
+    return Scaffold(
+      backgroundColor: bgColor,
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(),
+                Lottie.asset('assets/restLoading.json'),
+                FadingText('Loading ...',style: GoogleFonts.lato(
+                  color: kTextColor,
+                  fontSize: 18,
+                ),)
+              ],
+            ),
+          ),
+        );
   }
 
   Future<bool> checkNetwork()async {
