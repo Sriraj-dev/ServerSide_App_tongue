@@ -99,7 +99,7 @@ class ApiServices {
 
     return result['deliveryPartners'];
   }
-
+  
   requestDeliveryPartner(String branchId,String partnerId,String orderId)async{
     Map<String,dynamic> data = {
       "branchId":branchId,
@@ -115,35 +115,18 @@ class ApiServices {
     var result = json.decode(res.body);
     return result['status'];
   }
-
-
-  // Future assignPartner(
-  //     String branchId, String partnerId, String orderId) async {
-  //   Map<String, dynamic> data = {
-  //     "branchId": branchId,
-  //     "partnerId": partnerId,
-  //     "orderId": orderId
-  //   };
-  //   var res = await http.patch(
-  //     Uri.parse(baseUrl + 'tongue/currentOrders/assignPartner'),
-  //     headers: {"Content-Type": "application/json"},
-  //     body: json.encode(data)
-  //   );
-  //   var result = json.decode(res.body);
-  //   return result['status'];
-  // }
-  // Future informPartner(String partnerId,String branchId,String orderId)async{
-  //   Map<String, dynamic> data = {
-  //     "branchId": branchId,
-  //     "partnerId": partnerId,
-  //     "orderId": orderId
-  //   };
-  //   var res = await http.patch(
-  //       Uri.parse(baseUrl + 'tongue/deliveryPartners/assignOrder'),
-  //       headers: {"Content-Type": "application/json"},
-  //       body: json.encode(data)
-  //   );
-  //   var result = json.decode(res.body);
-  //   return result['status'];
-  // }
+  
+  Future receiveCashFromPartner(String branchId,String partnerId)async{
+    Map<String,dynamic> data = {
+      "branchId":branchId,
+      "partnerId":partnerId
+    };
+    var res = await http.patch(
+      Uri.parse(baseUrl+'tongue/receiveCashFromPartner'),
+        headers: {"Content-Type": "application/json"},
+      body: json.encode(data)
+    );
+    var response = json.decode(res.body);
+    return response['status'];
+  }
 }

@@ -56,6 +56,7 @@ getDeliveryPartners()async{
 
 
 setCurrentOrders()async{
+  getDeliveryPartners();
   print('setting currentOrders');
   currentOrders = await ApiServices().getCurrentOrders(branchId);
   bool temp = false;
@@ -68,7 +69,6 @@ setCurrentOrders()async{
   });
   incomingOrder = temp;
   setPastOrders();
-  getDeliveryPartners();
   checkIncoming.sink.add(true);
 }
 

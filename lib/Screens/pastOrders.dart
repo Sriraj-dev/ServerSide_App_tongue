@@ -91,7 +91,7 @@ class _PastOrdersState extends State<PastOrders> {
                                       fontWeight: FontWeight.bold),
                                   children: [
                                     TextSpan(
-                                        text: orderData['_id'],
+                                        text: orderData['orderId'],
                                         style: GoogleFonts.lato(
                                             fontWeight: FontWeight.normal,
                                             color: Colors.black,

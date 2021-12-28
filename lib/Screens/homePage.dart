@@ -2,13 +2,13 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hawk_fab_menu/hawk_fab_menu.dart';
 import 'package:lottie/lottie.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:tongue_services/Orders.dart';
 import 'package:tongue_services/Screens/AssignPartner.dart';
 import 'package:tongue_services/Screens/orderDetails.dart';
 import 'package:tongue_services/Screens/pastOrders.dart';
+import 'package:tongue_services/Screens/settings.dart';
 import 'package:tongue_services/Services/APIservices.dart';
 import 'package:tongue_services/constants.dart';
 
@@ -20,8 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  //Use currentOrders list in Orders.dart for now temporarily.
-  //Just design the UI for now ... Will make the backend after completing User side App.
   late TabController _tabController;
 
   bool isLoading = false;
@@ -132,10 +130,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               IconButton(
                   onPressed: (){
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context)=>PastOrders())
+                      MaterialPageRoute(builder: (context)=>Settings())
                     );
                   },
-                  icon: Icon(Icons.history_rounded))
+                  icon: Icon(Icons.settings))
             ],
           ),
         ),
