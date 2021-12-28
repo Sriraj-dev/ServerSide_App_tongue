@@ -56,7 +56,7 @@ class _PartnersDetailsState extends State<PartnersDetails> {
                     isLoading = true;
                   });
                   bool received = await ApiServices().receiveCashFromPartner(deliveryPartners[index]['branchId'], deliveryPartners[index]['_id']);
-                  getDeliveryPartners();
+                  await getDeliveryPartners();
                   setState(() {
                     isLoading = false;
                   });
@@ -67,7 +67,6 @@ class _PartnersDetailsState extends State<PartnersDetails> {
                         dismissOnBackKeyPress: false,
                         showCloseIcon: true,
                         title: 'Amount Received!',
-                        desc: ((deliveryPartners[index]['cashReceived']??0).toStringAsFixed(1)),
                         dialogType: DialogType.SUCCES,
                         btnOkOnPress: (){}
                     )..show();
